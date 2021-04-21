@@ -1,4 +1,4 @@
-// absolutely necessary 
+// absolutely necessary
 console.log('Charles is the best maker of rocket patrol tutorials :^)');
 
 // game config
@@ -10,7 +10,7 @@ let config = {
 }
 let game = new Phaser.Game(config);
 
-// set UI sizes 
+// set UI sizes
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 let starSpeed = 4;

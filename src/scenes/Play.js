@@ -1,10 +1,14 @@
+
 class Play extends Phaser.Scene {
+
+  //import particle from './particle.js';
     constructor() {
         super("playScene");
     }
     // preload
-
+    //import particleC from './src/prefabs/particle.js';
     preload() {
+        this.load.image('feathers', './assets/feathers.png');
         this.load.image('rocket', './assets/water_gun.png');
         this.load.image('spaceship', './assets/yellow_bird.png');
         this.load.image('bird2', './assets/blue_bird.png');
@@ -43,10 +47,20 @@ class Play extends Phaser.Scene {
         // add a Rocket
         this.player1Rocket = new Rocket(this, game.config.width / 2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
         // add spaceshift (x3)
+        const p = this.add.particles('feathers');
+
 
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 3).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'bird2', 0, 2).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'bird3', 0, 1).setOrigin(0, 0);
+        // creating particles
+
+        //createParticles(){
+
+          //this.particles = this.add.particles('star');
+          //this.emitter = this.particles.createEmitter(particleC);
+        //}
+
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -127,16 +141,19 @@ class Play extends Phaser.Scene {
             console.log('hit s1');
             this.player1Rocket.reset();
             this.shipExplode(this.ship01);
+
         }
         if (this.checkCollision(this.player1Rocket, this.ship02)) {
             console.log('hit s2');
             this.player1Rocket.reset();
             this.shipExplode(this.ship02);
+
         }
         if (this.checkCollision(this.player1Rocket, this.ship03)) {
             console.log('hit s3');
             this.player1Rocket.reset();
             this.shipExplode(this.ship03);
+
         }
     }
 
@@ -159,20 +176,37 @@ class Play extends Phaser.Scene {
 
         ship.alpha = 0;
 
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
-        boom.anims.play('explode');
+        
 
-        boom.on('animationcomplete', () => {
-            ship.reset();
-            ship.alpha = 1;
-            boom.destroy();
-        });
-        // score add
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
+
+
         // expload sound
 
         this.sound.play('sfx_explosion');
+        // particles add
+        const p = this.add.particles('feathers');
+        const e = p.createEmitter(
+          {
+            alpha: { start: 1, end: 0 },
+            scale: { start: 0.5, end: 2.5 },
+
+          speed: 100,
+          accelerationY: -300,
+          angle: { min: -85, max: -95 },
+          rotate: { min: -180, max: 180 },
+          lifespan: { min: 500, max: 1000 },
+          blendMode: 'ADD',
+          frequency: 1,
+          maxParticles: 20,
+
+          x: ship.x,
+          y: ship.y
+          }
+        );
+        ship.alpha = 1;
+        ship.reset();
 
 
     }
