@@ -3,8 +3,8 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
     preload() {
-        this.load.audio('sfx_select', './assets/assets_blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/discord-leave.mp3');
+        this.load.audio('sfx_select', './assets/discord-leave.mp3');
+        this.load.audio('sfx_explosion', './assets/roblox.mp3');
         this.load.audio('sfx_rocket', './assets/pew.mp3');
         this.load.image('starfield', './assets/bird_background.jpeg');
     }
@@ -13,7 +13,7 @@ class Menu extends Phaser.Scene {
 
         let menuConfig =
         {
-            fontFamily: 'Courier',
+            fontFamily: 'Times',
             fontSize: '28px',
             backgroundColor: '#CBC3E3',
             color: '#FFFFFF',
@@ -44,8 +44,9 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             game.settings =
             {
-                spaceshipSpeed: 3,
-                gameTimer: 60000
+                spaceshipSpeed: 10,
+                rocketSpeed:5,
+                gameTimer: 45000
             }
             this.sound.play('sfx_select');
             this.scene.start("playScene");
@@ -53,8 +54,9 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
             game.settings =
             {
-                spaceshipSpeed: 4,
-                gameTimer: 45000
+                spaceshipSpeed: 5,
+                rocketSpeed: 10,
+                gameTimer: 30000
             }
             this.sound.play('sfx_select');
             this.scene.start("playScene");
