@@ -13,8 +13,8 @@ class Menu extends Phaser.Scene {
         {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F38141',
-            color: '#843605',
+            backgroundColor: '#CBC3E3',
+            color: '#FFFFFF',
             align: 'right',
             padding:
             {
@@ -24,10 +24,10 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
         // show menu text
-        this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding, '>< Bird Patrol ><', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding, 'Bird Patrol', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width / 2, game.config.height / 2, 'Use arrows to move & F to fire', menuConfig).setOrigin(0.5);
-        menuConfig.backgorundColor = "#00FF00";
-        menuConfig.color = '#000';
+        menuConfig.backgroudColor = "#CBC3E3";
+        menuConfig.color = '#FFFFFF';
         this.add.text(game.config.width / 2, game.config.height / 2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
 
         // define keys
