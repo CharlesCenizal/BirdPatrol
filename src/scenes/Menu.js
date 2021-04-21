@@ -1,3 +1,15 @@
+// Name Date Project title and how long it took me to complete the Project
+// Charles Cenizal
+// 4/21/21
+// How long it took: 12 hours
+// Points breakdown
+// 60 pts Shrek Tier
+// 20 pts for particle emitter
+// 20 pts new artwork
+// 20 pts new smaller faster spaceship type
+// 10 pts new title screen, typography and style
+// game config
+// sourcers Nathan's tutorials and lectures
 class Menu extends Phaser.Scene {
     constructor() {
         super("menuScene");

@@ -1,4 +1,15 @@
-
+// Name Date Project title and how long it took me to complete the Project
+// Charles Cenizal
+// 4/21/21
+// How long it took: 12 hours
+// Points breakdown
+// 60 pts Shrek Tier
+// 20 pts for particle emitter
+// 20 pts new artwork
+// 20 pts new smaller faster spaceship type
+// 10 pts new title screen, typography and style
+// game config
+// sourcers Nathan's tutorials and lectures
 class Play extends Phaser.Scene {
 
   //import particle from './particle.js';
@@ -88,7 +99,8 @@ class Play extends Phaser.Scene {
 
         // keeping score
         this.p1Score = 0;
-
+        // high score
+        this.p1HighScore = 0;
         // display the score
 
         let scoreConfig =
@@ -105,7 +117,7 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1HighScore, scoreConfig);
 
         // game over
         this.gameOver = false;
@@ -113,7 +125,7 @@ class Play extends Phaser.Scene {
         // 60 second play clock
 
         scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(30000, () => {
+        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
