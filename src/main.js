@@ -4,8 +4,8 @@ console.log('Charles is the best maker of rocket patrol tutorials :^)');
 // game config
 let config = {
     type: Phaser.CANVAS,
-    width: 640,
-    height: 480,
+    width: 800,
+    height: 800,
     scene: [Menu, Play]
 }
 let game = new Phaser.Game(config);

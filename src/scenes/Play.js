@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
     // preload
     //import particleC from './src/prefabs/particle.js';
     preload() {
+        this.load.image('small_target', './assets/small_target.png');
         this.load.image('feathers', './assets/feathers.png');
         this.load.image('rocket', './assets/water_gun.png');
         this.load.image('spaceship', './assets/yellow_bird.png');
@@ -46,13 +47,19 @@ class Play extends Phaser.Scene {
             , 0xD39785).setOrigin(0, 0);
         // add a Rocket
         this.player1Rocket = new Rocket(this, game.config.width / 2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.player1Rocket.moveSpeed = game.settings.rocketSpeed;
         // add spaceshift (x3)
         const p = this.add.particles('feathers');
 
-
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 3).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'bird2', 0, 2).setOrigin(0, 0);
+        this.ship00 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'small_target', 0, 3).setOrigin(0, 0);
+        this.ship00.moveSpeed = 12;
+        this.ship00.points = 20;
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 10).setOrigin(0, 0);
+        this.ship01.moveSpeed = 9;
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'bird2', 0, 5).setOrigin(0, 0);
+        this.ship02.moveSpeed = 6;
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'bird3', 0, 1).setOrigin(0, 0);
+        this.ship03.moveSpeed = 3;
         // creating particles
 
         //createParticles(){
@@ -126,6 +133,7 @@ class Play extends Phaser.Scene {
             // update rocket
             this.player1Rocket.update();
             // update ships
+            this.ship00.update();
             this.ship01.update();
             // makes birds spin like crazy
             //let randRotation = 2;
@@ -137,6 +145,12 @@ class Play extends Phaser.Scene {
 
 
         // check collisions
+        if (this.checkCollision(this.player1Rocket, this.ship00)) {
+            console.log('hit s0');
+            this.player1Rocket.reset();
+            this.shipExplode(this.ship00);
+
+        }
         if (this.checkCollision(this.player1Rocket, this.ship01)) {
             console.log('hit s1');
             this.player1Rocket.reset();
@@ -176,7 +190,7 @@ class Play extends Phaser.Scene {
 
         ship.alpha = 0;
 
-        
+
 
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
